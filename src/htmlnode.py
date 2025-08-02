@@ -1,3 +1,6 @@
+from src.textnode import TextType
+
+
 class HTMLNode:
     def __init__(self, tag: str = None, value: str = None, children: list = None, props: dict = None):
         self.tag = tag
@@ -17,7 +20,7 @@ class HTMLNode:
         return f"HTMLNode(tag={self.tag}, value={self.value}, children={self.children}, props={self.props})"
     
 class LeafNode(HTMLNode):
-    def __init__(self, tag: str, value: str, props: dict = None):
+    def __init__(self, tag, value: str, props: dict = None):
         super().__init__(tag, value, None, props)
     
     def to_html(self) -> str:
@@ -48,3 +51,20 @@ class ParentNode(HTMLNode):
 
     def __repr__(self):
         return f"ParentNode({self.tag}, children: {self.children}, {self.props})"
+
+def text_node_to_html_node(text_node):
+    """Convert a TextNode to an HTMLNode."""
+    if text_node.text_type == TextType.TEXT:
+        return LeafNode(None, text_node.text)
+    elif text_node.text_type == TextType.BOLD_TEXT:
+        return LeafNode("b", text_node.text)
+    elif text_node.text_type == TextType.ITALIC_TEXT:
+        return LeafNode("i", text_node.text)
+    elif text_node.text_type == TextType.CODE_TEXT:
+        return LeafNode("code", text_node.text)
+    elif text_node.text_type == TextType.LINK_TEXT:
+        return LeafNode("a", text_node.text, {"href": text_node.url})
+    elif text_node.text_type == TextType.IMAGE:
+        return LeafNode("img", "", {"src": text_node.url, "alt": text_node.text})
+    else:
+        raise ValueError(f"Unknown text type: {text_node.text_type}")
