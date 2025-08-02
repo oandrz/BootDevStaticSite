@@ -18,8 +18,8 @@ class TestTextNode(unittest.TestCase):
     
     def test_eq_none_url_explicit(self):
         """Test that TextNode objects with explicitly None URL are equal"""
-        node1 = TextNode("Bold text", TextType.BOLD_TEXT, None)
-        node2 = TextNode("Bold text", TextType.BOLD_TEXT, None)
+        node1 = TextNode("Bold text", TextType.BOLD, None)
+        node2 = TextNode("Bold text", TextType.BOLD, None)
         self.assertEqual(node1, node2)
     
     def test_not_eq_different_text(self):
@@ -31,13 +31,13 @@ class TestTextNode(unittest.TestCase):
     def test_not_eq_different_text_type(self):
         """Test that TextNode objects with different text_type are not equal"""
         node1 = TextNode("Hello", TextType.TEXT)
-        node2 = TextNode("Hello", TextType.BOLD_TEXT)
+        node2 = TextNode("Hello", TextType.BOLD)
         self.assertNotEqual(node1, node2)
     
     def test_not_eq_different_url(self):
         """Test that TextNode objects with different URLs are not equal"""
-        node1 = TextNode("Link text", TextType.LINK_TEXT, "https://example.com")
-        node2 = TextNode("Link text", TextType.LINK_TEXT, "https://different.com")
+        node1 = TextNode("Link text", TextType.LINK, "https://example.com")
+        node2 = TextNode("Link text", TextType.LINK, "https://different.com")
         self.assertNotEqual(node1, node2)
     
     def test_not_eq_url_vs_none(self):
@@ -48,17 +48,17 @@ class TestTextNode(unittest.TestCase):
     
     def test_not_eq_none_vs_url(self):
         """Test that TextNode with None URL is not equal to TextNode with URL"""
-        node1 = TextNode("Code", TextType.CODE_TEXT, None)
-        node2 = TextNode("Code", TextType.CODE_TEXT, "https://github.com")
+        node1 = TextNode("Code", TextType.CODE, None)
+        node2 = TextNode("Code", TextType.CODE, "https://github.com")
         self.assertNotEqual(node1, node2)
     
     def test_not_eq_different_types_same_text(self):
         """Test various text types with same text are not equal"""
         base_text = "Sample text"
         text_node = TextNode(base_text, TextType.TEXT)
-        bold_node = TextNode(base_text, TextType.BOLD_TEXT)
-        italic_node = TextNode(base_text, TextType.ITALIC_TEXT)
-        code_node = TextNode(base_text, TextType.CODE_TEXT)
+        bold_node = TextNode(base_text, TextType.BOLD)
+        italic_node = TextNode(base_text, TextType.ITALIC)
+        code_node = TextNode(base_text, TextType.CODE)
         
         self.assertNotEqual(text_node, bold_node)
         self.assertNotEqual(text_node, italic_node)

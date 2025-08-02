@@ -3,10 +3,10 @@ from enum import Enum
 class TextType(Enum):
     TEXT = "text"
     IMAGE = "image"
-    BOLD_TEXT = "bold_text"
-    ITALIC_TEXT = "italic_text"
-    CODE_TEXT = "code_text"
-    LINK_TEXT = "link_text"
+    BOLD = "bold_text"
+    ITALIC = "italic_text"
+    CODE = "code_text"
+    LINK = "link_text"
     IMAGE_LINK = "image_link"
 
 class TextNode:
