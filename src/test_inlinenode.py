@@ -1,6 +1,6 @@
 import unittest
-from src.inline_utils import split_nodes_delimiter
-from src.textnode import TextNode, TextType
+from inline_utils import split_nodes_delimiter
+from textnode import TextNode, TextType
 
 
 class TestInlineUtils(unittest.TestCase):
