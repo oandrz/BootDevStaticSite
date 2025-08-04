@@ -1,5 +1,5 @@
 import unittest
-from markdown_utils import markdown_to_blocks, markdown_to_html_node, block_to_block_type
+from markdown_utils import markdown_to_blocks, markdown_to_html_node, block_to_block_type, extract_title
 from block_type import BlockType
 
 
@@ -187,6 +187,30 @@ the **same** even with inline stuff
             html,
             "<div><pre><code>This is text that _should_ remain\nthe **same** even with inline stuff\n</code></pre></div>",
         )
+
+    def test_extract_title_valid_h1(self):
+        """Test extracting title from markdown with valid H1 heading"""
+        markdown = "# My Title\n\nSome content here."
+        result = extract_title(markdown)
+        self.assertEqual(result, "My Title")
+
+    def test_extract_title_with_leading_whitespace(self):
+        """Test extracting title with leading whitespace in heading"""
+        markdown = "#    Title with Spaces   \n\nContent follows."
+        result = extract_title(markdown)
+        self.assertEqual(result, "Title with Spaces")
+
+    def test_extract_title_multiline_first_block(self):
+        """Test extracting title when first block has multiple lines"""
+        markdown = "# Main Title\nSubtitle line\n\nParagraph content."
+        result = extract_title(markdown)
+        self.assertEqual(result, "Main Title")
+
+    def test_extract_title_no_heading(self):
+        """Test when first block is not a heading"""
+        markdown = "This is just a paragraph.\n\n# Later heading"
+        result = extract_title(markdown)
+        self.assertIsNone(result)
 
 if __name__ == "__main__":
     unittest.main()

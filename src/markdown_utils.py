@@ -127,3 +127,13 @@ def quote_to_html_node(block):
     content = " ".join(new_lines)
     children = text_to_children(content)
     return ParentNode("blockquote", children)
+
+def extract_title(markdown):
+    """Extract the title from the markdown content."""
+    blocks = markdown_to_blocks(markdown)
+    if not blocks:
+        return None
+    first_block = blocks[0].strip()
+    if starts_with_headings(first_block):
+        return first_block.split("\n")[0][2:].strip()  # Remove the heading marker
+    return None
