@@ -1,5 +1,5 @@
 from file_utils import copy_static_to_public
-from page_generator import generate_page
+from page_generator import generate_pages_recursive
 
 
 def main():
@@ -11,10 +11,10 @@ def main():
     else:
         print("Failed to copy static directory to public directory")
 
-    generate_page(
-        from_path="./content/index.md",
+    generate_pages_recursive(
+        dir_path_content="./content",
         template_path="./template.html",
-        dest_path="./public/index.html"
+        dest_path_dir="./public"
     )
 
 
