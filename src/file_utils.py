@@ -120,7 +120,7 @@ def copy_static_to_public():
     Convenience function to copy static directory to public directory.
     This is the specific use case mentioned in the requirements.
     """
-    return copy_directory_recursive("../static", "../public")
+    return copy_directory_recursive("../static", "../docs")
 
 
 def write_html_to_file(html_content: str, dest_path: str, log_operations: bool = True) -> bool:
